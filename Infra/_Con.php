@@ -1,7 +1,7 @@
 ﻿<?php
 $servidor='localhost';
-$usuario='root'; $senha='';
-$db='projetop2';
+$usuario='root'; $senha='1234';
+$db='projetobd';
 $con = mysqli_connect($servidor, $usuario, $senha, $db);
 if (!$con) {
 echo("Erro na conexão com MySQL");

@@ -4,13 +4,12 @@ if (session_status() !== PHP_SESSION_ACTIVE)
      session_start();
 }
 $nome = $_POST["nome"];
-$preco = $_POST["preco"];
-$qtdeEstoque = $_POST["qtdeEstoque"];
-$unidadeMedida = $_POST["unidadeMedida"];
-$idCategoria = $_POST["idCategoria"];
+$qtde_estoque = $_POST["qtde_estoque"];
+$valor_unitario = $_POST["valor_unitario"];
+$unidade_medida = $_POST["unidade_medida"];
 include('../Infra/DbHelper.php');
 
-$campos = array('nome','preco','qtdeEstoque','unidadeMedida','idCategoria');
+$campos = array('nome','qtde_estoque','valor_unitario','unidade_media');
 $valores = array($nome,$preco,$qtdeEstoque,$unidadeMedida,$idCategoria);
 
 if(VerificaUnic('produto','nome',$nome) != 0){

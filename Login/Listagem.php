@@ -10,7 +10,7 @@
     <html>
     <head>
     <meta charset="UTF-8">
-    <title> Listagem Categorias </title>
+    <title> Listagem Vendedores </title>
 </head>
 <body>
 <?php
@@ -19,16 +19,26 @@
         unset($_SESSION['msg']);
     }
 ?>
-<p><center><h1> Listagem categorias</center></h1>
+<p><center><h1> Listagem Vendedores</center></h1>
 <table border ="1" width="100%">
 <?php
 include('../Infra/DbHelper.php');
-include('../Infra/Con.php');
-echo "<tr><td><b> Descrição                  </td><tr>";
-$query = GetQueryAll("categoria","descricao");
+include('../Infra/_Con.php');
+echo "<tr>
+        <td><b> Nome</td>
+        <td><b> Cidade</td>
+        <td><b> Estado</td>
+        <td><b> Endereco</td>
+        <td><b> Porcentagem de Comissao</td>
+      <tr>";
+$query = GetQueryAll("vendedor","nome");
 $resu= mysqli_query($con, $query) or die(mysqli_connect_error());
 while ($reg = mysqli_fetch_array($resu)){
-    echo "<tr><td>".$reg['descricao']. "</td>";
+    echo "<tr><td>".$reg['nome']. "</td>";
+    echo "<td>".$reg['cidade']. "</td>";
+    echo "<td>".$reg['estado']. "</td>";
+    echo "<td>".$reg['endereco']. "</td>";
+    echo "<td>".$reg['porcComissao']. "</td>";
     echo "<td><a href='Alterar.php?id=".$reg['id']."'>Editar</a></td>";
     echo "<td><a href='Deletar.php?id=".$reg['id']."'>Excluir</a></td>";
 
@@ -39,7 +49,7 @@ while ($reg = mysqli_fetch_array($resu)){
 <?php
 mysqli_close($con)
 ?>
-<td><a href='../Categoria/Index.html'>Tela Inicial Categoria</a></td>
+<td><a href='../Vendedor/Index.html'>Tela Inicial Vendedor</a></td>
 
 </body>
 </html>

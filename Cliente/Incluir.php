@@ -4,42 +4,55 @@ if (session_status() !== PHP_SESSION_ACTIVE)
      session_start();
 }
 $nome = $_POST["nome"];
-$cpf = $_POST["cpf"];
-$email = $_POST["email"];
-$telefone = $_POST["telefone"];
+$endereco = $_POST["endereco"];
+$numero = $_POST["numero"];
+$bairro = $_POST["bairro"];
 $cidade = $_POST["cidade"];
 $estado = $_POST["estado"];
-$endereco = $_POST["endereco"];
-$limiteCredito = $_POST["limiteCredito"];
+$email = $_POST["email"];
+$cpf_cnpj = $_POST["cpf_cnpj"];
+$rg = $_POST["rg"];
+$telefone = $_POST["telefone"];
+$celular = $_POST["celular"];
+$dataNascimento = $_POST["data_nasc"];
 include('../Infra/DbHelper.php');
 
 $campos = array('nome',
-'cpf',
-'email',
-'telefone',
+'endereco',
+'numero',
+'bairro',
 'cidade',
 'estado',
-'endereco',
-'limiteCredito');
+'email',
+'cpf_cnpj',
+'rg',
+'telefone',
+'celular ',
+'data_nasc');
+
 $valores = array($nome,
-$cpf,
-$email,
-$telefone,
+$endereco,
+$numero,
+$bairro,
 $cidade,
 $estado,
-$endereco,
-$limiteCredito);
+$email,
+$cpf_cnpj,
+$rg,
+$telefone,
+$celular,
+$dataNascimento);
 
 
-if(VerificaUnic('cliente','cpf',$cpf) != 0){
+if(VerificaUnic('clientes','cpf_cnpj',$cpf_cnpj) != 0){
     $_SESSION['msg'] = "<p style='color:red;'>ja existe um  cliente cadastrado com esse cpf!</p>"; 
 }
 
-if(VerificaUnic('cliente','email',$email) != 0){
+if(VerificaUnic('clientes','email',$email) != 0){
     $_SESSION['msg'] = "<p style='color:red;'>ja existe um  cliente cadastrado com esse email!</p>"; 
 }
 
-if(InsertInto("cliente",$campos,$valores))
+if(InsertInto("clientes",$campos,$valores))
 {
     $_SESSION['msg'] = "<p style='color:blue;'> Cliente cadastrado com sucesso!</p>"; 
     header('Location: Cadastro.php');

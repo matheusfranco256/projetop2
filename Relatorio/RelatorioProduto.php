@@ -4,7 +4,7 @@
         session_start();
     }
     include('../Infra/DbHelper.php');
-    include('../Infra/Con.php');
+    include('../Infra/_Con.php');
 ?>
 <p><center><h1> Relatorio Produtos</center></h1>
 <form action="" method="POST">

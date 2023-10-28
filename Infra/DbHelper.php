@@ -2,7 +2,7 @@
 
 function InsertInto($tableName,$listFields,$listValues)
 {
-    include ("Con.php");
+    include ("_Con.php");
     $campos = join(",",$listFields);
     $valores = [];
     $valoresQuery ="";
@@ -26,7 +26,7 @@ function InsertInto($tableName,$listFields,$listValues)
 }
 function Update($tableName,$listFields,$listValues,$id)
 {    
-    include ("Con.php");
+    include ("_Con.php");
     $setUpdate = [];
     $totacampos = count($listFields);
     for ($i = 0; $i < $totacampos ;$i++) 
@@ -47,7 +47,7 @@ function Update($tableName,$listFields,$listValues,$id)
 }
 function GetById($tableName,$id)
 {
-    include ("Con.php");
+    include ("_Con.php");
     $query = "SELECT * FROM {$tableName} WHERE id = {$id}"; 
     $result = mysqli_query($con, $query);
     return mysqli_fetch_assoc($result);
@@ -55,7 +55,7 @@ function GetById($tableName,$id)
 
 function VerificaChaveEst($tableName,$FkName,$id)
 {
-    include ("Con.php");
+    include ("_Con.php");
     $query="SELECT * from {$tableName} WHERE {$FkName} = $id";
     mysqli_query($con, $query);
     if (mysqli_affected_rows ($con))
@@ -70,7 +70,7 @@ function VerificaChaveEst($tableName,$FkName,$id)
 
 function Delete($tableName,$id)
 {
-    include ("Con.php");
+    include ("_Con.php");
     $query="DELETE FROM {$tableName} WHERE id={$id}";
     echo $query;
     mysqli_query($con, $query);
@@ -83,7 +83,7 @@ function Delete($tableName,$id)
 }
 function DeleteParents($tableName,$id,$field)
 {
-    include ("Con.php");
+    include ("_Con.php");
     $query="DELETE FROM {$tableName} WHERE {$field}={$id}";
     echo $query;
     mysqli_query($con, $query);
@@ -96,18 +96,18 @@ function DeleteParents($tableName,$id,$field)
 }
 
 function GetQueryAll($tableName,$orderBy){
-    include ("Con.php");
+    include ("_Con.php");
     return  "SELECT * from {$tableName} ORDER BY {$orderBy}"; 
 }
 
 function GetQueryAllFilter($tableName,$orderBy,$searchField,$seachValue){
-    include ("Con.php");
+    include ("_Con.php");
     return  "SELECT * from {$tableName} WHERE {$searchField}=\"".$seachValue."\" ORDER BY {$orderBy}"; 
 }
 
 function VerificaUnic($tableName,$field,$value)
 {
-    include ("Con.php");
+    include ("_Con.php");
     $query="SELECT * from {$tableName} WHERE {$field}=\"".$value."\"";
     $result = mysqli_query($con, $query);
 
@@ -123,7 +123,7 @@ function VerificaUnic($tableName,$field,$value)
 
 function ReturnInsertQuery ($tableName,$listFields,$listValues)
 {
-    include ("Con.php");
+    include ("_Con.php");
     $campos = join(",",$listFields);
     $valores = [];
     $valoresQuery ="";
@@ -139,7 +139,7 @@ function ReturnInsertQuery ($tableName,$listFields,$listValues)
 }
 
 function CadastroVenda($queryVenda,$listProd,$listQtde){
-    include ("Con.php");
+    include ("_Con.php");
     mysqli_begin_transaction($con) or die (mysqli_connect_error());
     try{
 

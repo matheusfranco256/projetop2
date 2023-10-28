@@ -1,6 +1,6 @@
 <?php
 include('../Infra/DbHelper.php');
-include('../Infra/Con.php');
+include('../Infra/_Con.php');
     if (session_status() !== PHP_SESSION_ACTIVE) 
     { 
         session_start();
@@ -23,26 +23,13 @@ include('../Infra/Con.php');
 <p><h1> Cadastro de Produto </h1>
 <form method="POST" action="Incluir.php"> 
 <p> Nome: <input type="text" size="100" maxlength="100" name="nome" required>
-<p> Quantidade no Estoque: <input type="number" name="qtdeEstoque">
-<p>Unidade de Medida: <select name="unidadeMedida">
+<p> Quantidade no Estoque: <input type="number" name="qtde_estoque">
+<p> ValorUnitario: <input type="number" name="valor_unitario">
+<p>Unidade de Medida: <select name="unidade_medida">
             <option value="G"> Grama </option>
             <option value="KG"> Quilograma </option>
             <option value="MG"> miligrama </option>
             </select>
-<p> Preço: <input type="number" name="preco">
-<label> Categoria: </label>
-    <select name="idCategoria">
-    <?php
-        $query = GetQueryAll("categoria","descricao");
-        echo $query;
-        $resu= mysqli_query($con, $query) or die(mysqli_connect_error());
-        while ($reg = mysqli_fetch_array($resu)) {
-    ?>
-    <option value="<?php echo $reg['id']; ?>"> <?php echo $reg['descricao']; ?> </option> 
-    <?php
-    } 
-    ?>
-    </select>
 
 <p> <input type="submit" value="Enviar"> <input type="reset" value="Limpar">
 <p><a href='../Produto/Index.html'>Tela Inicial Produto</a>

@@ -22,15 +22,9 @@ if(isset($_SESSION['msg'])){
 <form method="POST" action="procDel.php">
 <input type="hidden" name="id" value="<?php echo $row['id']; ?>">
 <p><label> Nome: <?php echo $row['nome']; ?></label>
-<p> Preço: <?php echo $row['preco']; ?>
-<p>Qtde Estoque: <?php echo $row['qtdeEstoque']; ?>
-<p>Unidade Medida: <?php echo $row['unidadeMedida']; ?>
-<p> Categoria: 
-<?php 
- $idCat = $row["idCategoria"];
- $rowCat = GetById("categoria",$idCat);  
-echo $rowCat['descricao']; 
-?>
+<p>Qtde Estoque: <?php echo $row['qtde_estoque']; ?>
+<p> ValorUnitario: <?php echo $row['valor_unitario']; ?>
+<p>Unidade Medida: <?php echo $row['unidade_medida']; ?>
 <p><input type="submit" value="Confirma exclusão">
 </form>
 </body>
