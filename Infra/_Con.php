@@ -1,6 +1,6 @@
 ﻿<?php
 $servidor='localhost';
-$usuario='root'; $senha='1234';
+$usuario='root'; $senha='';
 $db='projetobd';
 $con = mysqli_connect($servidor, $usuario, $senha, $db);
 if (!$con) {

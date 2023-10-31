@@ -9,8 +9,8 @@ $valor_unitario = $_POST["valor_unitario"];
 $unidade_medida = $_POST["unidade_medida"];
 include('../Infra/DbHelper.php');
 
-$campos = array('nome','qtde_estoque','valor_unitario','unidade_media');
-$valores = array($nome,$preco,$qtdeEstoque,$unidadeMedida,$idCategoria);
+$campos = array('nome','qtde_estoque','valor_unitario','unidade_medida');
+$valores = array($nome,$qtdeEstoque,$valor_unitario, $unidadeMedida);
 
 if(VerificaUnic('produto','nome',$nome) != 0){
     $_SESSION['msg'] = "<p style='color:red;'>ja existe um  produto cadastrado com esse nome!</p>"; 

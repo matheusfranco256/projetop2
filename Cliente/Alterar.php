@@ -1,8 +1,9 @@
 <?php
 session_start();
 include ("../Infra/DbHelper.php");
+include('../Infra/_Con.php');
 $id = filter_input (INPUT_GET, 'id', FILTER_SANITIZE_NUMBER_INT); 
-$row = GetById("cliente",$id);
+$row = GetById("clientes", $id);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -10,7 +11,7 @@ $row = GetById("cliente",$id);
 <meta charset="utf-8"> <title>Alterar cliente</title>
 </head>
 <body>
-    <h1>ALterar Cliente</h1>
+    <h1>Alterar Cliente</h1>
 <?php
 if (isset($_SESSION['msg'])) {
     echo $_SESSION['msg'];
@@ -32,12 +33,9 @@ if (isset($_SESSION['msg'])) {
 <p> Email: <input type="text" size="100" maxlength="100" name="email"> 
 <p> CPF_CNPJ: <input type="text" size="14" maxlength="14" name="cpf_cnpj" required>
 <p> RG: <input type="text" size="9" maxlength="9" name="rg" required>
-
 <p> Telefone: <input type="text" size="50" maxlength="20" name="telefone">
 <p> Celular: <input type="text" size="50" maxlength="20" name="celular">
 <p> DataNascimento: <input type="date" name="data_nasc" required>
-<input type="number" name="limiteCredito" value="<?php echo $row['limiteCredito']; ?>"> 
-
 
 
 <input type="submit" value="Salvar">
