@@ -6,7 +6,6 @@ function InsertInto($tableName,$listFields,$listValues)
     $campos = join(",",$listFields);
     $valores = [];
     $valoresQuery ="";
-    //descricao='$descricao'
     foreach($listValues as $v)
     {
      array_push($valores,"\"".$v."\"");
