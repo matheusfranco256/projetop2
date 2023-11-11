@@ -3,12 +3,11 @@ session_start();
 include_once("../Infra/DbHelper.php");
 $id = filter_input(INPUT_POST,'id',FILTER_SANITIZE_NUMBER_INT);
 $nome = filter_input(INPUT_POST,'nome');
-$preco = filter_input(INPUT_POST,'preco');
-$qtdeEstoque = filter_input(INPUT_POST,'qtdeEstoque');
-$unidadeMedida = filter_input(INPUT_POST,'unidadeMedida');
-$idCategoria = filter_input(INPUT_POST,'idCategoria');
-$campos = array('nome','preco','qtdeEstoque','unidadeMedida','idCategoria');
-$valores = array($nome,$preco,$qtdeEstoque,$unidadeMedida,$idCategoria);
+$qtde_estoque = filter_input(INPUT_POST,'qtde_estoque');
+$valor_unitario = filter_input(INPUT_POST,'valor_unitario');
+$unidade_medida = filter_input(INPUT_POST,'unidade_medida');
+$campos = array('nome','qtde_estoque','valor_unitario','unidade_medida');
+$valores = array($nome,$qtde_estoque,$valor_unitario,$unidade_medida);
 
 $verif = VerificaUnic('produto','nome',$nome);
 

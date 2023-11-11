@@ -24,21 +24,18 @@ include('../Infra/DbHelper.php');
 include('../Infra/_Con.php');
 echo "<tr>
         <td><b> Nome</td>
-        <td><b> Preco</td>
         <td><b> Qtde Estoque</td>
-        <td><b> Unidade Medida</td>
-        <td><b> categoria</td>
+        <td><b> Valor Unitario</td>
+        <td><b> Unidade de Medida</td>
       <tr>";
 $query = GetQueryAll("produto","nome");
 $resu= mysqli_query($con, $query) or die(mysqli_connect_error());
 while ($reg = mysqli_fetch_array($resu)){
-     $idCat = $reg["idCategoria"];
-     $row = GetById("categoria",$idCat);
+
     echo "<tr><td>".$reg['nome']. "</td>";
-    echo "<td>".$reg['preco']. "</td>";
-    echo "<td>".$reg['qtdeEstoque']. "</td>";
-    echo "<td>".$reg['unidadeMedida']. "</td>";
-    echo "<td>".$row['descricao']. "</td>";
+    echo "<td>".$reg['qtde_estoque']. "</td>";
+    echo "<td>".$reg['valor_unitario']. "</td>";
+    echo "<td>".$reg['unidade_medida']. "</td>";
     echo "<td><a href='Alterar.php?id=".$reg['id']."'>Editar</a></td>";
     echo "<td><a href='Deletar.php?id=".$reg['id']."'>Excluir</a></td>";
 }

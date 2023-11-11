@@ -1,4 +1,7 @@
 <?php
+      include('../Infra/_Con.php');
+      include('../Infra/DbHelper.php');
+ 
     if (session_status() !== PHP_SESSION_ACTIVE) 
     { 
         session_start();
@@ -13,13 +16,16 @@
     <title> Cadastro de Pedido </title>
 </head>
 <body>
+
 <?php
+
     if (isset($_SESSION['msg'])){ 
         echo $_SESSION['msg'];
         unset($_SESSION['msg']);
+        
     }
 ?>
-<p><h1> Cadastro de Login </h1>
+<p><h1> Cadastro de Pedido </h1>
 <form method="POST" action="Incluir.php"> 
 
 
@@ -27,8 +33,8 @@
 <p> Cliente:
     <select name="id_cliente">
     <?php
+      
         $query = GetQueryAll("clientes","nome");
-        echo $query;
         $resu= mysqli_query($con, $query) or die(mysqli_connect_error());
         while ($reg = mysqli_fetch_array($resu)) {
     ?>
@@ -43,6 +49,6 @@
 <p> Prazo de Entrega: <input type="text" size="100" maxlength="20" name="prazo_entrega">
 
 <p> <input type="submit" value="Enviar"> <input type="reset" value="Limpar">
-<p><a href='../Pedidos/Index.html'>Tela Inicial Login</a>
+<p><a href='../Pedidos/Index.html'>Tela Inicial Pedidos</a>
 </form>
 </body>

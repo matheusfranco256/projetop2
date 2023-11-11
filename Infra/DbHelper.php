@@ -52,6 +52,15 @@ function GetById($tableName,$id)
     return mysqli_fetch_assoc($result);
 }
 
+function GetItemPedidoById($tableName,$id)
+{
+    include ("_Con.php");
+    $query = "SELECT * FROM {$tableName} WHERE id_item = {$id}"; 
+    $result = mysqli_query($con, $query);
+    return mysqli_fetch_assoc($result);
+}
+
+
 function VerificaChaveEst($tableName,$FkName,$id)
 {
     include ("_Con.php");
@@ -80,6 +89,21 @@ function Delete($tableName,$id)
         return false;
     }
 }
+
+function DeleteItemPedido($tableName,$id)
+{
+    include ("_Con.php");
+    $query="DELETE FROM {$tableName} WHERE id_item={$id}";
+    echo $query;
+    mysqli_query($con, $query);
+    if (mysqli_affected_rows($con)){
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+
 function DeleteParents($tableName,$id,$field)
 {
     include ("_Con.php");

@@ -17,32 +17,30 @@
         unset($_SESSION['msg']);
     }
 ?>
-<p><center><h1> Listagem de Vendas</center></h1>
+<p><center><h1> Listagem de Pedidos</center></h1>
 <table border ="1" width="100%">
 <?php
 include('../Infra/DbHelper.php');
 include('../Infra/_Con.php');
 echo "<tr>
         <td><b> Data</td>
-        <td><b> Prazo Entrega</td>
-        <td><b> Condicao Pagamento</td>
         <td><b> Cliente</td>
-        <td><b> Vendedor</td>
+        <td><b> Observação</td>
+        <td><b> CondPagto</td>
+        <td><b> PrazoEntrega</td>
       <tr>";
-$query = GetQueryAll("venda","date");
+$query = GetQueryAll("pedidos","prazo_entrega");
 $resu= mysqli_query($con, $query) or die(mysqli_connect_error());
 while ($reg = mysqli_fetch_array($resu)){
-     $idCliente = $reg["idCliente"];
-     $rowCliente = GetById("cliente",$idCliente);
+     $idCliente = $reg["id_cliente"];
+     $rowCliente = GetById("clientes",$idCliente);
 
-     $idVendedor = $reg["idVendedor"];
-     $rowVendedor = GetById("vendedor",$idVendedor);
 
-    echo "<tr><td>".$reg['date']. "</td>";
-    echo "<td>".$reg['prazoEntrega']. "</td>";
-    echo "<td>".$reg['condPagto']. "</td>";
+    echo "<tr><td>".$reg['data']. "</td>";
     echo "<td>".$rowCliente['nome']. "</td>";
-    echo "<td>".$rowVendedor['nome']. "</td>";
+    echo "<td>".$reg['observacao']. "</td>";
+    echo "<td>".$reg['cond_pagto']. "</td>";
+    echo "<td>".$reg['prazo_entrega']. "</td>";
     echo "<td><a href='Deletar.php?id=".$reg['id']."'>Excluir</a></td>";
 }
 ?>
@@ -50,7 +48,7 @@ while ($reg = mysqli_fetch_array($resu)){
 <?php
 mysqli_close($con)
 ?>
-<td><a href='../Venda/Index.html'>Tela Inicial Venda</a></td>
+<td><a href='../Pedidos/Index.html'>Tela Inicial Pedidos</a></td>
 
 </body>
 </html>

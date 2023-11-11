@@ -8,7 +8,7 @@
     <html>
     <head>
     <meta charset="UTF-8">
-    <title> Listagem Produtos </title>
+    <title> Listagem itensPedido </title>
 </head>
 <body>
 <?php
@@ -17,7 +17,7 @@
         unset($_SESSION['msg']);
     }
 ?>
-<p><center><h1> Listagem de Vendas</center></h1>
+<p><center><h1> Listagem de itensPedido</center></h1>
 <table border ="1" width="100%">
 <?php
 include('../Infra/DbHelper.php');
@@ -27,7 +27,7 @@ echo "<tr>
         <td><b> IdProduto</td>
         <td><b> Qtde</td>
       <tr>";
-$query = GetQueryAll("pedidos","prazo_entrega");
+$query = GetQueryAll("itens_pedido","qtde");
 $resu= mysqli_query($con, $query) or die(mysqli_connect_error());
 while ($reg = mysqli_fetch_array($resu)){
 
@@ -36,9 +36,9 @@ while ($reg = mysqli_fetch_array($resu)){
      $rowProduto = GetById("produto",$idProduto);
 
     echo "<tr><td>".$reg['id_pedido']. "</td>";
-    echo "<td>".$reg['id_produto']. "</td>";
+    echo "<td>".$rowProduto['nome']. "</td>";
     echo "<td>".$reg['qtde']. "</td>";
-    echo "<td><a href='Deletar.php?id=".$reg['id_item']."'>Excluir</a></td>";
+    echo "<td><a href='Deletar.php?id_item=".$reg['id_item']."'>Excluir</a></td>";
 }
 ?>
 </table>

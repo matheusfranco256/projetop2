@@ -28,7 +28,7 @@ include('../Infra/_Con.php');
 <p>Unidade de Medida: <select name="unidade_medida">
             <option value="G"> Grama </option>
             <option value="KG"> Quilograma </option>
-            <option value="MG"> miligrama </option>
+            <option value="MG"> Miligrama </option>
             </select>
 
 <p> <input type="submit" value="Enviar"> <input type="reset" value="Limpar">

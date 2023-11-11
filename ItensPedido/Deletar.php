@@ -2,9 +2,10 @@
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
+include ("../Infra/_Con.php");
 include ("../Infra/DbHelper.php");
 $id = filter_input (INPUT_GET, 'id_item', FILTER_SANITIZE_NUMBER_INT); 
-$row = GetById("itens_pedido",$id);
+$row = GetItemPedidoById("itens_pedido",$id);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
