@@ -60,6 +60,14 @@ function GetItemPedidoById($tableName,$id)
     return mysqli_fetch_assoc($result);
 }
 
+function GetLoginByEmail($login,$senha)
+{
+    include ("_Con.php");
+    $query = "SELECT * FROM login_usuarios WHERE login = {$login}  AND senha ={$senha}"; 
+    $result = mysqli_query($con, $query);
+    return mysqli_fetch_assoc($result);
+}
+
 
 function VerificaChaveEst($tableName,$FkName,$id)
 {
