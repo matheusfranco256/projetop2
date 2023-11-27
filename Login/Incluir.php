@@ -3,16 +3,18 @@ if (session_status() !== PHP_SESSION_ACTIVE)
 { 
      session_start();
 }
-$login = $_POST["login"];
-$senha = $_POST["senha"];
-$id_cliente = $_POST["id_cliente"];
+include('../Infra/_Con.php');
 include('../Infra/DbHelper.php');
+$login = $_POST["login"];
+$senha = $_POST["passwd"];
+$id_cliente = $_POST["id_cliente"];
 
+$hashed_password = password_hash($senha, PASSWORD_DEFAULT);
 $campos = array('login',
 'senha',
 'id_cliente');
 $valores = array($login,
-$senha,
+$hashed_password,
 $id_cliente);
 
 if(InsertInto("login_usuarios",$campos,$valores))

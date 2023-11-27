@@ -62,14 +62,38 @@ function GetItemPedidoById($tableName,$id)
 
 function GetLoginByEmail($login,$senha,$idCliente)
 {
-    $query = "SELECT * FROM login_usuarios WHERE login = '{$login}'  AND senha = '{$senha}' AND id_cliente = '{$idCliente}'"; 
     include ("_Con.php");    
+    $query = "SELECT * FROM login_usuarios WHERE login = '{$login}'  AND senha = '{$senha}' AND id_cliente = '{$idCliente}'"; 
+   
     mysqli_query($con, $query);
     if (mysqli_affected_rows ($con))
     {
         return true;
     }
     else{
+        return false;
+    }
+}
+
+function GetHashedPasswordByEmail($login,$idCliente){
+    include ("_Con.php");   
+    $query = "SELECT * FROM login_usuarios WHERE login = '{$login}'  AND id_cliente = '{$idCliente}'";  
+    $result = mysqli_query($con, $query);
+
+    if ($result) {
+        // Check if there is at least one row in the result set
+        if (mysqli_num_rows($result) > 0) {
+            // Fetch the result as an associative array
+            $row = mysqli_fetch_assoc($result);
+            
+            // Return the value of the 'senha' field
+            return $row['senha'];
+        } else {
+            // No matching rows found
+            return false;
+        }
+    } else {
+        // Error in the query
         return false;
     }
 }
