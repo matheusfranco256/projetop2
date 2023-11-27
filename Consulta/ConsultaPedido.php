@@ -10,7 +10,7 @@
     <html>
     <head>
     <meta charset="UTF-8">
-    <title> Relatorio Venda </title>
+    <title> Relatorio Pedido </title>
 </head>
 <body>
 <?php
@@ -19,7 +19,7 @@
         unset($_SESSION['msg']);
     }
 ?>
-<p><center><h1> Consulta Venda</center></h1>
+<p><center><h1> Consulta Pedido</center></h1>
 <form action="" method="POST">
 <p> DataInicio: <input type="date" name="dataInicio" >
 <p> DataFim: <input type="date" name="dataFim" >
@@ -44,34 +44,33 @@ $dataFim = filter_input(INPUT_POST,'dataFim');
 
 echo "<tr>
         <td><b> Data</td>
-        <td><b> Prazo Entrega</td>
-        <td><b> Condicao Pagamento</td>
-        <td><b> Cliente</td>
-        <td><b> Vendedor</td>
+        <td><b> Nome</td>
+        <td><b> Observacao</td>
+        <td><b> Condicao de Pagamento</td>
+        <td><b> Prazo de Entrega</td>
       <tr>";
-$query = GetQueryAll("venda","date");  
+$query = GetQueryAll("pedidos","data");  
 if($verificBotao){
     if($dataInicio != "" && $dataFim != ""){
-        $query = "SELECT * FROM venda WHERE venda.date BETWEEN \"".$dataInicio."\" AND \"".$dataFim."\"";
+        $query = "SELECT * FROM pedidos WHERE pedidos.data BETWEEN \"".$dataInicio."\" AND \"".$dataFim."\"";
     }
 }
 if($verificBotao2){
-    $query = GetQueryAll("venda","date"); 
+    $query = GetQueryAll("pedidos","data"); 
 }
 $resu= mysqli_query($con, $query) or die(mysqli_connect_error());
 
 while ($reg = mysqli_fetch_array($resu)){
-    $idCliente = $reg["idCliente"];
-    $rowCliente = GetById("cliente",$idCliente);
+    $idCliente = $reg["id_cliente"];
+    $rowCliente = GetById("clientes",$idCliente);
 
-    $idVendedor = $reg["idVendedor"];
-    $rowVendedor = GetById("vendedor",$idVendedor);
 
-   echo "<tr><td>".$reg['date']. "</td>";
-   echo "<td>".$reg['prazoEntrega']. "</td>";
-   echo "<td>".$reg['condPagto']. "</td>";
+   echo "<tr><td>".$reg['data']. "</td>";
    echo "<td>".$rowCliente['nome']. "</td>";
-   echo "<td>".$rowVendedor['nome']. "</td>";
+   echo "<td>".$reg['observacao']. "</td>";
+   echo "<td>".$reg['cond_pagto']. "</td>";
+   echo "<td>".$reg['prazo_entrega']. "</td>";
+   
 }
 mysqli_close($con)
 ?>

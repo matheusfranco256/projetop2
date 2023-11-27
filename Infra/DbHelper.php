@@ -60,14 +60,19 @@ function GetItemPedidoById($tableName,$id)
     return mysqli_fetch_assoc($result);
 }
 
-function GetLoginByEmail($login,$senha)
+function GetLoginByEmail($login,$senha,$idCliente)
 {
-    include ("_Con.php");
-    $query = "SELECT * FROM login_usuarios WHERE login = {$login}  AND senha ={$senha}"; 
-    $result = mysqli_query($con, $query);
-    return mysqli_fetch_assoc($result);
+    $query = "SELECT * FROM login_usuarios WHERE login = '{$login}'  AND senha = '{$senha}' AND id_cliente = '{$idCliente}'"; 
+    include ("_Con.php");    
+    mysqli_query($con, $query);
+    if (mysqli_affected_rows ($con))
+    {
+        return true;
+    }
+    else{
+        return false;
+    }
 }
-
 
 function VerificaChaveEst($tableName,$FkName,$id)
 {
@@ -134,6 +139,11 @@ function GetQueryAll($tableName,$orderBy){
 function GetQueryAllFilter($tableName,$orderBy,$searchField,$seachValue){
     include ("_Con.php");
     return  "SELECT * from {$tableName} WHERE {$searchField}=\"".$seachValue."\" ORDER BY {$orderBy}"; 
+}
+function GetQueryAllFilter2($tableName,$orderBy,$searchField,$searchField2,$seachValue){
+    include ("_Con.php");
+    $query = "SELECT * from {$tableName} WHERE {$searchField}=\"".$seachValue."\" OR {$searchField2}=\"".$seachValue."\"  ORDER BY {$orderBy}";
+    return  $query;
 }
 
 function VerificaUnic($tableName,$field,$value)

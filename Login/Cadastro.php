@@ -1,19 +1,29 @@
 <?php
 include('../Infra/_Con.php');
 include('../Infra/DbHelper.php');
+$verificBot =  filter_input(INPUT_POST,'FazerLogin');
+$verificBotCadastro = filter_input(INPUT_POST,'Cadastro');
+if($verificBotCadastro){
+    
+    // header("Location: incluir.php");
+ }
 
-function login($login, $senha) {
-    $resu = GetLoginByEmail($login,$senha);
-    echo $resu;
-    if (mysqli_num_rows($resu) > 0) {
+ if($verificBot){
+    $login = filter_input(INPUT_POST,'login');
+    $senha = filter_input(INPUT_POST,'passwd');
+    $idCliente = filter_input(INPUT_POST,'id_cliente');
+    if (GetLoginByEmail($login,$senha,$idCliente)) {
         header("Location: ../Index/Index.html");
         exit();
     }else {
         $_SESSION['msg'] = "Usuário ou senha inválidos.";
-        header("Location: Cadastro.php");
+         header("Location: Cadastro.php");
         exit();
     }
-}
+
+   
+
+ }
 
 ?>
 <!DOCTYPE html
@@ -31,9 +41,9 @@ function login($login, $senha) {
     ?>
 
     <p><h1>Login</h1>
-    <form method="POST" action="Incluir.php">
+    <form method="POST" action="">
         <p>Login: <input type="text" size="100" maxlength="20" name="login" required>
-        <p>Senha: <input type="text" size="100" maxlength="10" name="senha">
+        <p>Senha: <input type="text" size="100" maxlength="10" name="passwd" required>
 
         <p>Cliente:
             <select name="id_cliente">
@@ -49,10 +59,15 @@ function login($login, $senha) {
                 ?>
             </select>
           
-                <p> <input type="submit" value="Cadastrar"> <input type="reset" value="Limpar"> 
+                <p>  <input type="submit" value="Login" name="FazerLogin">  <input type="submit" value="Cadastrar" name =  "Cadastro"> <input type="reset" value="Limpar"> 
                 <p><a href='../Login/Index.html'>Tela Inicial Login</a>
-                <p><button type="button" onclick="login(document.getElementsByName('login').value, document.getElementsByName('senha').value)">Login</button></p>
        
     </form>
 </body>
 </html>
+
+<?php 
+
+
+
+?>

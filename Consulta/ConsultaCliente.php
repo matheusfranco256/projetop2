@@ -21,7 +21,7 @@
 ?>
 <p><center><h1> Relatorio Clientes</center></h1>
 <form action="" method="POST">
-<label>Nome:</label><input type="text" name="nome" size ="30">
+<label>Nome ou Cidade:</label><input type="text" name="nome" size ="30">
 <p><input type="submit" name="Pesquisar" value="Pesquisar"></p>
 </form>
 
@@ -40,29 +40,37 @@ $value = filter_input(INPUT_POST,'nome');
 
 echo "<tr>
         <td><b> Nome</td>
-        <td><b> CPF</td>
-        <td><b> Email</td>
-        <td><b> Telefone</td>
+        <td><b> Endereco</td>
+        <td><b> Numero</td>
+        <td><b> Bairro</td>
         <td><b> Cidade</td>
         <td><b> Estado</td>
-        <td><b> Endereco</td>
-        <td><b> Limite de Credito</td>
+        <td><b> Email</td>
+        <td><b> CPF_CNPJ</td>
+        <td><b> RG</td>
+        <td><b> Telefone</td>
+        <td><b> Celular</td>
+        <td><b> DataNascimento</td>
       <tr>";
-$query = GetQueryAll("cliente","nome");     
+$query = GetQueryAll("clientes","nome");     
 if($verificBotao && $value != null){
-    $query = GetQueryAllFilter("cliente","nome","nome",$value);
+    $query = GetQueryAllFilter2("clientes","nome","nome","cidade",$value);
 }
 $resu= mysqli_query($con, $query) or die(mysqli_connect_error());
 
 while ($reg = mysqli_fetch_array($resu)){
     echo "<tr><td>".$reg['nome']. "</td>";
-    echo "<td>".$reg['cpf']. "</td>";
-    echo "<td>".$reg['email']. "</td>";
-    echo "<td>".$reg['telefone']. "</td>";
+    echo "<td>".$reg['endereco']. "</td>";
+    echo "<td>".$reg['numero']. "</td>";
+    echo "<td>".$reg['bairro']. "</td>";
     echo "<td>".$reg['cidade']. "</td>";
     echo "<td>".$reg['estado']. "</td>";
-    echo "<td>".$reg['endereco']. "</td>";
-    echo "<td>".$reg['limiteCredito']. "</td>";
+    echo "<td>".$reg['email']. "</td>";
+    echo "<td>".$reg['cpf_cnpj']. "</td>";
+    echo "<td>".$reg['rg']. "</td>";
+    echo "<td>".$reg['telefone']. "</td>";
+    echo "<td>".$reg['celular']. "</td>";
+    echo "<td>".$reg['data_nasc']. "</td>";
 }
 mysqli_close($con)
 ?>

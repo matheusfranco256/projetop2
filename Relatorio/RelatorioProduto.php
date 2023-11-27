@@ -18,37 +18,30 @@ $verificBotao =  filter_input(INPUT_POST,'Gerar');
 use Dompdf\Dompdf;
 if($verificBotao){
     
-$query = GetQueryAll("produto","idCategoria"); 
+$query = GetQueryAll("produto","nome"); 
 $resu= mysqli_query($con, $query) or die(mysqli_connect_error());
 
 $linha ="";
 $lastId = 0;
 while ($reg = mysqli_fetch_array($resu)){
-    $idCat = $reg["idCategoria"];
-    $row = GetById("categoria",$idCat);
-    if($lastId != $idCat)
-    {
-        $linha.= "<tr><td>".$row['descricao']. "</td>";
-    
-    }
-    $lastId = $idCat;
-   $linha.= "<tr><td></td><td>".$reg['nome']. "</td>";
-   $linha.= "<td>".$reg['preco']. "</td>";
-   $linha.= "<td>".$reg['qtdeEstoque']. "</td>";
-   $linha.= "<td>".$reg['unidadeMedida']. "</td>";
+
+   $linha.= "<tr><td>".$reg['nome']. "</td>";
+   $linha.= "<td>".$reg['qtde_estoque']. "</td>";
+   $linha.= "<td>".$reg['valor_unitario']. "</td>";
+   $linha.= "<td>".$reg['unidade_medida']. "</td>";
 }
 mysqli_close($con);
 
 $html =  '
-<h1 style="text-align: center;"> Relatorio Produtos</h1>
-<hr>
-<table border ="1" width="100%">
+
+
+
+<table  width="100%">
 <tr>
-    <tr><td><b> categoria</td>
-    <td><b> Nome</td>
-    <td><b> Preco</td>
-    <td><b> Qtde Estoque</td>
-    <td><b> Unidade Medida</td>
+    <tr><td><b> Nome</td>
+    <td><b> Quantidade de Estoque</td>
+    <td><b> Valor Unitario</td>
+    <td><b> Unidade de Medida</td>
   </tr>
 '.
 $linha

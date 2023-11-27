@@ -22,20 +22,8 @@ include('../Infra/_Con.php');
 ?>
 <p><center><h1> Relatorio Produtos</center></h1>
 <form action="" method="POST">
-<label> Categoria: </label>
-    <select name="idCategoria">
-    <?php
-        $query = GetQueryAll("categoria","descricao");
-        $resu= mysqli_query($con, $query) or die(mysqli_connect_error());
-        while ($reg = mysqli_fetch_array($resu)) {
-    ?>
-    <option value="<?php echo $reg['id']; ?>"> <?php echo $reg['descricao']; ?> </option> 
-    <?php
-    } 
-    ?>
-    <option value="0"> "Todas"</option> 
-    </select>
-    <p><input type="submit" name="Pesquisar" value="Pesquisar"></p>
+<label>Nome:</label><input type="text" name="nome" size ="30">
+<p><input type="submit" name="Pesquisar" value="Pesquisar"></p>
 </form>
 
 
@@ -45,29 +33,26 @@ include('../Infra/_Con.php');
 <?php
 
 $verificBotao =  filter_input(INPUT_POST,'Pesquisar');
-$value = filter_input(INPUT_POST,'idCategoria');
+$value = filter_input(INPUT_POST,'nome');
 
 echo "<tr>
         <td><b> Nome</td>
-        <td><b> Preco</td>
         <td><b> Qtde Estoque</td>
-        <td><b> Unidade Medida</td>
-        <td><b> categoria</td>
+        <td><b> Valor Unitario</td>
+        <td><b> Unidade de Medida</td>
       <tr>";
 $query = GetQueryAll("produto","nome"); 
 if($verificBotao && $value != 0){
-    $query = GetQueryAllFilter("produto","nome","IdCategoria",$value);
+    $query = GetQueryAllFilter("produto","nome","nome",$value);
 }
 $resu= mysqli_query($con, $query) or die(mysqli_connect_error());
 
 while ($reg = mysqli_fetch_array($resu)){
-    $idCat = $reg["idCategoria"];
-    $row = GetById("categoria",$idCat);
    echo "<tr><td>".$reg['nome']. "</td>";
-   echo "<td>".$reg['preco']. "</td>";
-   echo "<td>".$reg['qtdeEstoque']. "</td>";
-   echo "<td>".$reg['unidadeMedida']. "</td>";
-   echo "<td>".$row['descricao']. "</td>";
+   echo "<td>".$reg['qtde_estoque']. "</td>";
+   echo "<td>".$reg['valor_unitario']. "</td>";
+   echo "<td>".$reg['unidade_medida']. "</td>";
+
 }
 mysqli_close($con)
 ?>
