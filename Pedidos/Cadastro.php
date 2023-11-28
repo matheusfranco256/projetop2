@@ -47,6 +47,21 @@
 <p> Condição de Pagamento: <input type="text" size="100" maxlength="50" name="cond_pagto">
 
 <p> Prazo de Entrega: <input type="text" size="100" maxlength="20" name="prazo_entrega">
+<p> Produto:
+    <select name="id_produto">
+    <?php
+        $query = GetQueryAll("produto","nome");
+        $resu= mysqli_query($con, $query) or die(mysqli_connect_error());
+        while ($reg = mysqli_fetch_array($resu)) {
+    ?>
+    <option value="<?php echo $reg['id']; ?>"> <?php echo $reg['nome']; ?> </option> 
+    <?php
+    } 
+    ?>
+    </select>
+
+    <p> Quantidade: <input type="number" name="qtde">
+
 
 <p> <input type="submit" value="Enviar"> <input type="reset" value="Limpar">
 <p><a href='../Pedidos/Index.html'>Tela Inicial Pedidos</a>

@@ -23,6 +23,30 @@ function InsertInto($tableName,$listFields,$listValues)
             return  false;
         }    
 }
+
+function InsertInto2($tableName, $listFields, $listValues)
+{
+    include("_Con.php");
+    $campos = join(",", $listFields);
+    $valores = [];
+    $valoresQuery = "";
+
+    foreach ($listValues as $v) {
+        array_push($valores, "\"" . $v . "\"");
+    }
+
+    $valoresQuery = join(",", $valores);
+    $query = "INSERT INTO {$tableName} ({$campos}) VALUES ({$valoresQuery})";
+
+    mysqli_query($con, $query);
+
+    $insertedId = mysqli_insert_id($con);
+
+    mysqli_close($con);
+
+    return $insertedId;
+}
+
 function Update($tableName,$listFields,$listValues,$id)
 {    
     include ("_Con.php");
